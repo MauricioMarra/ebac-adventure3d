@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class StateMachine<T> where T : System.Enum
 {
-    private Dictionary<T, StateBase> _statesDictionary;
+    public Dictionary<T, StateBase> statesDictionary;
     private StateBase _currentState;
 
     public void Init()
     {
-         _statesDictionary = new Dictionary<T, StateBase>();
+         statesDictionary = new Dictionary<T, StateBase>();
     }
 
-    public void RegisterState(T state)
+    public void RegisterState(T stateEnum, StateBase state)
     {
-        _statesDictionary.Add(state, new StateBase());
+        statesDictionary.Add(stateEnum, state);
     }
 
     public void SwitchState(T state)
     {
         if (_currentState != null) _currentState.OnStateExit();
 
-        _currentState = _statesDictionary[state];
+        _currentState = statesDictionary[state];
 
         _currentState.OnStateEnter();
     }

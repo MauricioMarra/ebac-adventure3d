@@ -6,28 +6,30 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private StateMachine<GameManagerStates> _stateMachine;
+    public StateMachine<GameManagerStates> stateMachine;
 
     private void Start()
     {
-        _stateMachine = new StateMachine<GameManagerStates>();
-        _stateMachine.Init();
+        stateMachine = new StateMachine<GameManagerStates>();
+        stateMachine.Init();
 
-        _stateMachine.RegisterState(GameManagerStates.Intro);
-        _stateMachine.RegisterState(GameManagerStates.Win);
-        _stateMachine.RegisterState(GameManagerStates.Lose);
-        _stateMachine.RegisterState(GameManagerStates.Gameplay);
-        _stateMachine.RegisterState(GameManagerStates.Paused);
+        stateMachine.RegisterState(GameManagerStates.Intro, new GameManagerIntroState());
+        stateMachine.RegisterState(GameManagerStates.Win, new StateBase());
+        stateMachine.RegisterState(GameManagerStates.Lose, new StateBase());
+        stateMachine.RegisterState(GameManagerStates.Gameplay, new StateBase());
+        stateMachine.RegisterState(GameManagerStates.Paused, new StateBase());
+
+        stateMachine.SwitchState(GameManagerStates.Intro);
     }
 
 
     #region DEBUG
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     [Button]
     public void StartGame()
     {
-        _stateMachine.SwitchState(GameManagerStates.Gameplay);
+        stateMachine.SwitchState(GameManagerStates.Gameplay);
     }
     #endif
 
