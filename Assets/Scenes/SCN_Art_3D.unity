@@ -6439,8 +6439,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 20
   _turnSpeed: 200
-  _gravity: 9.8
+  _gravity: 29.4
+  _jumpForce: 15
+  _vSpeed: 0
+  _runSpeedFactor: 2
   _animator: {fileID: 1755247081}
+  _runKey: 304
 --- !u!143 &1093045717
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7024,7 +7028,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179709625}
-  m_LocalRotation: {x: 0.21407244, y: -0.000000016807501, z: 0.000000003683412, w: 0.9768178}
+  m_LocalRotation: {x: 0.21407244, y: 0.000000016807501, z: -0.000000003683412, w: 0.9768178}
   m_LocalPosition: {x: 417.36, y: 4.3200126, z: 35.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9050,7 +9054,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.21407244, y: -0.000000016807501, z: 0.000000003683412, w: 0.9768178}
+  m_LocalRotation: {x: 0.21407244, y: 0.000000016807501, z: -0.000000003683412, w: 0.9768178}
   m_LocalPosition: {x: 417.36, y: 4.3200126, z: 35.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
