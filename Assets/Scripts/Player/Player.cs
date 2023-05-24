@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
         _movementVector.y = _vSpeed;
 
         _characterController.Move(_movementVector * Time.deltaTime);
+
+        _animator.SetBool("IsGrounded", _characterController.isGrounded);
     }
 
     private void Jump()
@@ -56,7 +58,10 @@ public class Player : MonoBehaviour
         if (_characterController.isGrounded)
         {
             if (Input.GetKeyDown(KeyCode.Space))
+            {
                 _vSpeed = _jumpForce;
+                _animator.SetTrigger("Jump");
+            }
         }
 
         _vSpeed -= _gravity * Time.deltaTime;
