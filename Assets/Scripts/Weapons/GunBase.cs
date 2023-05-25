@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class GunBase : MonoBehaviour
 {
     public ProjectileBase projectile;
     public Transform projectileSpawnPoint;
@@ -13,21 +13,7 @@ public class Gun : MonoBehaviour
 
     private Coroutine _shootCoroutine;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            _shootCoroutine = StartCoroutine(ShootCoroutine());
-        }
-
-        if (Input.GetKeyUp(KeyCode.Z))
-        {
-            if (_shootCoroutine != null) StopCoroutine(_shootCoroutine);
-        }
-    }
-
-    IEnumerator ShootCoroutine()
+    protected virtual IEnumerator ShootCoroutine()
     {
         while (true)
         {
@@ -36,9 +22,19 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    protected void Shoot()
     {
         var p = Instantiate(projectile, projectileSpawnPoint.position, transform.rotation);
         p.direction = player.transform.localScale.x;
+    }
+
+    public void StartShoting()
+    {
+        _shootCoroutine = StartCoroutine(ShootCoroutine());
+    }
+
+    public void StopShooting()
+    {
+        if (_shootCoroutine != null) StopCoroutine(_shootCoroutine);
     }
 }

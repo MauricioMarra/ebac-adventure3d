@@ -20,7 +20,7 @@ public class ProjectileBase : MonoBehaviour
         this.transform.Translate(0, 0, direction * bulletSpeed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
 
     }
