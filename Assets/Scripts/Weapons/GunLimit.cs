@@ -24,7 +24,8 @@ public class GunLimit : GunBase
 
             UIManager.instance.UpdateBulletCount((float)_currentBullets / (float)_maxBullets);
 
-            yield return new WaitForSeconds(shootDelay);
+            if (_currentBullets < _maxBullets)
+                yield return new WaitForSeconds(shootDelay);
         }
 
         Recharge();
