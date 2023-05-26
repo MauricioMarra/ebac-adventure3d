@@ -21,6 +21,9 @@ public class GunLimit : GunBase
         {
             Shoot();
             _currentBullets++;
+
+            UIManager.instance.UpdateBulletCount((float)_currentBullets / (float)_maxBullets);
+
             yield return new WaitForSeconds(shootDelay);
         }
 
@@ -39,6 +42,9 @@ public class GunLimit : GunBase
         {
             Debug.Log($"Recharge counter: {_rechargeCounter}");
             _rechargeCounter += Time.deltaTime;
+
+            UIManager.instance.UpdateBulletCount(_rechargeDelay, _rechargeCounter);
+
             yield return new WaitForEndOfFrame();
         }
 
