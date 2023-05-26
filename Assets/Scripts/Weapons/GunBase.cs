@@ -13,6 +13,11 @@ public class GunBase : MonoBehaviour
 
     private Coroutine _shootCoroutine;
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     protected virtual IEnumerator ShootCoroutine()
     {
         while (true)
@@ -22,7 +27,7 @@ public class GunBase : MonoBehaviour
         }
     }
 
-    protected void Shoot()
+    protected virtual void Shoot()
     {
         var p = Instantiate(projectile, projectileSpawnPoint.position, transform.rotation);
         p.direction = player.transform.localScale.x;
