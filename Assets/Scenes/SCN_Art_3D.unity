@@ -7101,8 +7101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdf8e4fa9e64a44bb22e5a8d2b5a435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gun: {fileID: 6285498241501883068, guid: e35e1245ba717ea43b1545e1dd689adf, type: 3}
+  _gun: {fileID: 6989345700020882574, guid: a14bc0cd8b0728943b8a4c57c8137359, type: 3}
   _gunPosition: {fileID: 1099854747}
+  _gunList:
+  - {fileID: 6989345700020882574, guid: a14bc0cd8b0728943b8a4c57c8137359, type: 3}
+  - {fileID: 6285498241501883068, guid: e35e1245ba717ea43b1545e1dd689adf, type: 3}
 --- !u!1001 &1095099566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7670,7 +7673,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179709625}
-  m_LocalRotation: {x: 0.21407244, y: 0.000000016807501, z: -0.000000003683412, w: 0.9768178}
+  m_LocalRotation: {x: 0.21407244, y: -0.000000016807501, z: 0.000000003683412, w: 0.9768178}
   m_LocalPosition: {x: 417.36, y: 4.3200126, z: 35.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9752,7 +9755,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1500100153}
-  m_LocalRotation: {x: 0.21407244, y: 0.000000016807501, z: -0.000000003683412, w: 0.9768178}
+  m_LocalRotation: {x: 0.21407244, y: -0.000000016807501, z: 0.000000003683412, w: 0.9768178}
   m_LocalPosition: {x: 417.36, y: 4.3200126, z: 35.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
