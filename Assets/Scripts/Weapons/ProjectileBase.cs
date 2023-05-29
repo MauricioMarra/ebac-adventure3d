@@ -25,7 +25,10 @@ public class ProjectileBase : MonoBehaviour
         var c = collision.gameObject.GetComponent<IDamagable>();
         if (c != null)
         {
-            c.TakeDamage(5);
+            var hitDirection = collision.gameObject.transform.position - transform.position;
+            hitDirection.y = 0;
+
+            c.TakeDamage(5, hitDirection.normalized * -1);
             Destroy(gameObject);
         }
     }

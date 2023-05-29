@@ -53,4 +53,9 @@ public class EnemyBase : MonoBehaviour, IDamagable
     {
         OnDamage(damage);
     }
+    public void TakeDamage(float damage, Vector3 hitDirection)
+    {
+        transform.position -= hitDirection;
+        OnDamage(damage);
+    }
 }
