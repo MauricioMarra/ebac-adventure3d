@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamagable
 {
     [SerializeField] private float _speed = 1f;
     [SerializeField] private float _turnSpeed = 1f;
@@ -66,5 +66,15 @@ public class Player : MonoBehaviour
 
         _vSpeed -= _gravity * Time.deltaTime;
         _vSpeed = Mathf.Clamp(_vSpeed, _gravity * -1, _jumpForce * 2);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        
+    }
+
+    public void TakeDamage(float damage, Vector3 hitDirection)
+    {
+        
     }
 }

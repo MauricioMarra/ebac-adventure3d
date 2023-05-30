@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8568882294491240840}
   - component: {fileID: 7319644564155392160}
   m_Layer: 0
-  m_Name: PFB_Projectile
+  m_Name: PFB_ProjectileEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
   bulletSpeed: 50
   direction: 1
   _tagsToCollide:
-  - Enemy
+  - Player
 --- !u!54 &7319644564155392160
 Rigidbody:
   m_ObjectHideFlags: 0

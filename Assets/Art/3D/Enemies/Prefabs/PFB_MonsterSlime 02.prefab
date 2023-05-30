@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5242492743294800919}
   - component: {fileID: 9176740066966780470}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Eye_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4453773794164461534}
   - component: {fileID: 5532898189538147445}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mouth_closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3410879063033658881}
   - component: {fileID: 6763298144360750615}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SPR_Enemy_Eyebrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8555255876323514135}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4309288971383145716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8473556370026790288}
   - component: {fileID: 7562768251600561019}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Eye_Closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5495740226105250478}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5991577990238741269}
   - component: {fileID: 4070382653633689300}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SPR_Enemy_Eyebrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4570782525980779100}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Eyebrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4182918462216564334}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577743234175994494}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Eyebrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 6954268188840861965}
   - component: {fileID: 5144924261696689607}
   - component: {fileID: 5198380618090564724}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PFB_MonsterSlime 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8891243560892856515}
   - component: {fileID: 7376381090263547752}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Eye_Closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,7 +819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4325574373602669592}
   - component: {fileID: 4315662850526794165}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mouth_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7164892045609888071}
   - component: {fileID: 2682338903875497953}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Eye_Open
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ public class EnemyBase : MonoBehaviour, IDamagable
     private Flash _flashComponent;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         _currentLife = _maxLife;
         _animationBase = GetComponent<AnimationBase>();
