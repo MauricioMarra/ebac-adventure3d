@@ -1,4 +1,5 @@
 using BossStates;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,9 @@ namespace Boss
     public enum BossStates
     {
         Init,
+        Idle,
         Move,
+        Attack,
         Death
     }
 
@@ -20,6 +23,11 @@ namespace Boss
         private HealthBase _healthBase;
         private AnimationBase _animationBase;
 
+        private int _maxAttacks = 3;
+
+        private float _attackDelay = .5f;
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -27,6 +35,7 @@ namespace Boss
 
             _bossStates.Init();
             _bossStates.RegisterState(BossStates.Init, new BossStateInit());
+            _bossStates.RegisterState(BossStates.Attack, new BossStateAttack());
 
             _healthBase = GetComponent<HealthBase>();
             _healthBase.OnKill += OnBossDeath;
@@ -40,10 +49,44 @@ namespace Boss
         
         }
 
+        public void SwitchState(BossStates state)
+        {
+            _bossStates.SwitchState(state, this);
+        }
+
+
+        #region DEBUG
         [NaughtyAttributes.Button]
         public void SwitchInit()
         {
             _bossStates.SwitchState(BossStates.Init, this);
+        }
+
+        [NaughtyAttributes.Button]
+        public void SwitchAttack()
+        {
+            _bossStates.SwitchState(BossStates.Attack, this);
+        }
+        #endregion
+
+
+        public void Attack(Action callback = null)
+        {
+            StartCoroutine(StartAttacking(callback));
+        }
+
+        public IEnumerator StartAttacking(Action callback = null)
+        {
+            var _attackCount = 1;
+
+            while (_attackCount <= _maxAttacks)
+            {
+                _attackCount++;
+                transform.DOScale(transform.localScale * 1.2f, .2f).SetLoops(2, LoopType.Yoyo);
+                yield return new WaitForSeconds(_attackDelay);
+            }
+
+            callback?.Invoke();
         }
 
         public void TakeDamage(float damage)

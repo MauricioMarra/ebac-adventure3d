@@ -6,12 +6,12 @@ public class StateBase
 
     virtual public void OnStateEnter(params object[] obj)
     {
-        Debug.Log(message);
+        Debug.Log($"{message}, OnStateEnter");
     }
 
     virtual public void OnStateExit()
     {
-        Debug.Log(message);
+        Debug.Log($"{message}, OnStateExit");
     }
 }
 

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7391640520123263037}
   - component: {fileID: 7391640520123263034}
-  - component: {fileID: 7391640520123263035}
   - component: {fileID: 7391640520123263032}
   - component: {fileID: 7391640520123263033}
+  - component: {fileID: 1316706091}
   m_Layer: 0
-  m_Name: Enemy01
+  m_Name: EnemyBase
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,21 +50,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.62, y: 7.42, z: 6.46}
   m_Center: {x: 0, y: 3.66, z: 0}
---- !u!114 &7391640520123263035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391640520123263036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8b4b5a03126bd45ba41af03ca80643, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentLife: 0
-  _maxLife: 10
-  hitParticleSystem: {fileID: 7391640520282960611}
 --- !u!114 &7391640520123263032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +87,22 @@ MonoBehaviour:
   _mesh: {fileID: 467893172372012151}
   _flashColor: {r: 0.7169812, g: 0.05751187, b: 0, a: 0}
   _duration: 0.15
+--- !u!114 &1316706091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7391640520123263036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 339de3aaaffb751449565c80730ea075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentLife: 0
+  _maxLife: 10
+  hitParticleSystem: {fileID: 7391640520282960611}
+  _player: {fileID: 0}
 --- !u!1 &7391640520282960612
 GameObject:
   m_ObjectHideFlags: 0

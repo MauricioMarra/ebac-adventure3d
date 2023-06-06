@@ -16,6 +16,8 @@ public class EnemyPatrol : EnemyBase
 
     private void Patrol()
     {
+        if (_isDead) return;
+
         if (_patrolPositions.Count > 0)
         {
             if (Vector3.Distance(transform.position, _patrolPositions[nextPoint].transform.position) < 0.1f)

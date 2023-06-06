@@ -11,6 +11,8 @@ public class EnemyBase : MonoBehaviour, IDamagable
     private AnimationBase _animationBase;
     private Flash _flashComponent;
 
+    protected bool _isDead = false;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -28,6 +30,7 @@ public class EnemyBase : MonoBehaviour, IDamagable
 
     private void Kill()
     {
+        _isDead = true;
         Destroy(gameObject, 3f);
         _animationBase.PlayAnimationByType(AnimationType.Death);
     }
