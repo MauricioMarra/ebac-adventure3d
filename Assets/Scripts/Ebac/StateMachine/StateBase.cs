@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class StateBase
 {
-    public string message;
+    public string message = "Debug from StateBase";
 
-    virtual public void OnStateEnter()
+    virtual public void OnStateEnter(params object[] obj)
     {
         Debug.Log(message);
     }
@@ -17,7 +17,7 @@ public class StateBase
 
 public class StateRunning : StateBase
 {
-    public override void OnStateEnter()
+    public override void OnStateEnter(params object[] obj)
     {
         message = $"Entering {this.GetType()}";
 
@@ -36,7 +36,7 @@ public class StateRunning : StateBase
 
 public class StatePaused : StateBase
 {
-    public override void OnStateEnter()
+    public override void OnStateEnter(params object[] obj)
     {
         message = $"Entering {this.GetType()}";
 
@@ -55,7 +55,7 @@ public class StatePaused : StateBase
 
 public class StateDeath: StateBase
 {
-    public override void OnStateEnter()
+    public override void OnStateEnter(params object[] obj)
     {
         message = $"Entering {this.GetType()}";
 
@@ -72,7 +72,7 @@ public class StateDeath: StateBase
 
 public class StateEndGame: StateBase
 {
-    public override void OnStateEnter()
+    public override void OnStateEnter(params object[] obj)
     {
         message = $"Entering {this.GetType()}";
 

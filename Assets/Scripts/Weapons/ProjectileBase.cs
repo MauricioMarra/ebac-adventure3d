@@ -31,7 +31,11 @@ public class ProjectileBase : MonoBehaviour
             var hitDirection = collision.gameObject.transform.position - transform.position;
             hitDirection.y = 0;
 
-            c.TakeDamage(5, hitDirection.normalized * -1);
+            if (collision.gameObject.tag.Equals("Boss"))
+                c.TakeDamage(5);
+            else
+                c.TakeDamage(5, hitDirection.normalized * -1);
+
             Destroy(gameObject);
         }
     }

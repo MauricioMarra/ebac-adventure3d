@@ -18,13 +18,13 @@ public class StateMachine<T> where T : System.Enum
         statesDictionary.Add(stateEnum, state);
     }
 
-    public void SwitchState(T state)
+    public void SwitchState(T state, params object[] obj)
     {
         if (_currentState != null) _currentState.OnStateExit();
 
         _currentState = statesDictionary[state];
 
-        _currentState.OnStateEnter();
+        _currentState.OnStateEnter(obj);
     }
 
     public StateBase GetCurrentState()

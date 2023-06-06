@@ -147,6 +147,7 @@ MonoBehaviour:
   direction: 1
   _tagsToCollide:
   - Enemy
+  - Boss
 --- !u!54 &7319644564155392160
 Rigidbody:
   m_ObjectHideFlags: 0
