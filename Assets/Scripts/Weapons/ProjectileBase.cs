@@ -13,14 +13,14 @@ public class ProjectileBase : MonoBehaviour
 
     [SerializeField] private List<string> _tagsToCollide = new List<string>();
 
-    private void Start()
+    protected virtual void Start()
     {
         Destroy(gameObject, _lifetime);
     }
 
     private void Update()
     {
-        this.transform.Translate(0, 0, direction * bulletSpeed * Time.deltaTime);
+        MoveProjectile();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -38,5 +38,10 @@ public class ProjectileBase : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    protected virtual void MoveProjectile()
+    {
+        this.transform.Translate(0, 0, direction * bulletSpeed * Time.deltaTime);
     }
 }

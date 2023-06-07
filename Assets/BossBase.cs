@@ -18,14 +18,20 @@ namespace Boss
 
     public class BossBase : MonoBehaviour, IDamagable
     {
+        [SerializeField] GameObject _arcProjectile;
+        [SerializeField] GameObject _projectileSpawnPoint;
+        [SerializeField] GameObject _player;
+
+        [Header("Shoot Attributes")]
+        [SerializeField] private float _attackDelay = 1f;
+        [SerializeField] private int _maxAttacks = 3;
+
         private StateMachine<BossStates> _bossStates;
 
         private HealthBase _healthBase;
         private AnimationBase _animationBase;
 
-        private int _maxAttacks = 3;
 
-        private float _attackDelay = .5f;
 
 
         // Start is called before the first frame update
@@ -83,6 +89,7 @@ namespace Boss
             {
                 _attackCount++;
                 transform.DOScale(transform.localScale * 1.2f, .2f).SetLoops(2, LoopType.Yoyo);
+                SpawnArcProjectile();
                 yield return new WaitForSeconds(_attackDelay);
             }
 
@@ -105,6 +112,13 @@ namespace Boss
             Destroy(gameObject, 3f);
 
             _animationBase.PlayAnimationByType(AnimationType.Death);
+        }
+
+        private void SpawnArcProjectile()
+        {
+            var p = Instantiate(_arcProjectile, _projectileSpawnPoint.transform.position, Quaternion.identity);
+            p.GetComponent<ProjectileArc>().SetTarget(_player);
+            p.GetComponent<ProjectileArc>().ShootProjectile();
         }
     }
 }
