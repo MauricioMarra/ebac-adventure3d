@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ProjectileArc : ProjectileBase
 {
     private GameObject _target;
+    
     private Transform startPoint;
     private Transform endPoint;
+    
     public float arcHeight = 5f;
     public float arcDuration = 1f;
 
     private float elapsedTime = 0f;
+
+    [SerializeField] private List<ParticleSystem> _explosion;
 
     private void Awake()
     {
@@ -70,5 +75,19 @@ public class ProjectileArc : ProjectileBase
     {
         this._target = target;
         endPoint = _target.transform;
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+
+        //if (_tagsToCollide.Find(x => x.Equals(collision.gameObject.tag)).Count() > 0)
+        if (!collision.gameObject.tag.Equals("Enemy") || !collision.gameObject.tag.Equals("Boss"))
+            PlayExplosion();
+    }
+
+    private void PlayExplosion()
+    {
+        _explosion.ForEach(i => i.Play());
     }
 }

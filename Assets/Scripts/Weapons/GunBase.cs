@@ -13,7 +13,7 @@ public class GunBase : MonoBehaviour
 
     private Coroutine _shootCoroutine;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }

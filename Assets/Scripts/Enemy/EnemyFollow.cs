@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,5 +25,6 @@ public class EnemyFollow : EnemyBase
             return;
 
         this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, _speed);
+        this.transform.LookAt(_player.transform);
     }
 }

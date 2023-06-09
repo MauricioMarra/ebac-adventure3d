@@ -4975,7 +4975,7 @@ MonoBehaviour:
   hitParticleSystem: {fileID: 6943844672438281143}
   _gun: {fileID: 6943844674348045021}
   _player: {fileID: 0}
-  _startShooting: 0
+  _startShooting: 1
 --- !u!1 &6943844674348044995
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class HealthBase : MonoBehaviour
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _currentHealth;
+    [SerializeField] private ParticleSystem _hitParticleSystem;
 
     private Flash _flashComponent;
 
@@ -28,6 +29,9 @@ public class HealthBase : MonoBehaviour
 
         if (_flashComponent != null)
             _flashComponent.FlashObject();
+
+        if (_hitParticleSystem != null)
+            _hitParticleSystem.Emit(30);
 
         if (_currentHealth <= 0)
             Kill();

@@ -11,7 +11,7 @@ public class ProjectileBase : MonoBehaviour
 
     private float _lifetime = 2f;
 
-    [SerializeField] private List<string> _tagsToCollide = new List<string>();
+    [SerializeField] protected List<string> _tagsToCollide = new List<string>();
 
     protected virtual void Start()
     {
@@ -23,10 +23,11 @@ public class ProjectileBase : MonoBehaviour
         MoveProjectile();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         var c = collision.gameObject.GetComponent<IDamagable>();
-        if (c != null && _tagsToCollide.Find(x => x.Equals(collision.gameObject.tag)).Count() > 0)
+
+        if (c != null && _tagsToCollide?.Find(x => x.Equals(collision.gameObject.tag))?.Count() > 0)
         {
             var hitDirection = collision.gameObject.transform.position - transform.position;
             hitDirection.y = 0;
@@ -36,7 +37,13 @@ public class ProjectileBase : MonoBehaviour
             else
                 c.TakeDamage(5, hitDirection.normalized * -1);
 
-            Destroy(gameObject);
+            Destroy(gameObject, 3f);
+        }
+
+        if (!collision.gameObject.tag.Equals("Enemy") && !collision.gameObject.tag.Equals("Boss") && !collision.gameObject.tag.Equals("Projectile"))
+        {
+            this.GetComponentInChildren<SphereCollider>().enabled = false;
+            this.GetComponentInChildren<MeshRenderer>().enabled = false;
         }
     }
 

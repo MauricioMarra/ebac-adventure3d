@@ -41,7 +41,6 @@ public class GunLimit : GunBase
     {
         while (_rechargeCounter < _rechargeDelay)
         {
-            Debug.Log($"Recharge counter: {_rechargeCounter}");
             _rechargeCounter += Time.deltaTime;
 
             UIManager.instance.UpdateBulletCount(_rechargeDelay, _rechargeCounter);
