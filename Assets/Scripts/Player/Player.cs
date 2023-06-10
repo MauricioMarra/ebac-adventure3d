@@ -15,6 +15,14 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
 
     private CharacterController _characterController;
+    private HealthBase _healthBase;
+
+
+    private void OnValidate()
+    {
+        if (_healthBase == null)
+            _healthBase = GetComponent<HealthBase>();
+    }
 
     private float _runSpeed = 1f;
 
@@ -22,6 +30,10 @@ public class Player : MonoBehaviour, IDamagable
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
+
+        OnValidate();
+
+        _healthBase.OnKill += OnDeath;
     }
 
     // Update is called once per frame
@@ -70,11 +82,17 @@ public class Player : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
-        
+        _healthBase.TakeDamage(damage);
     }
 
     public void TakeDamage(float damage, Vector3 hitDirection)
     {
         
+    }
+
+    public void OnDeath()
+    {
+        Destroy(this.gameObject);
+        Debug.Log("Player is dead.");
     }
 }
