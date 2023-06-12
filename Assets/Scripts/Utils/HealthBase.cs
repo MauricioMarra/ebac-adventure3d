@@ -12,6 +12,7 @@ public class HealthBase : MonoBehaviour
     private Flash _flashComponent;
 
     public Action OnKill;
+    public Action OnDamage;
 
     private void Awake()
     {
@@ -33,6 +34,8 @@ public class HealthBase : MonoBehaviour
         if (_hitParticleSystem != null)
             _hitParticleSystem.Emit(30);
 
+        OnDamage.Invoke();
+
         if (_currentHealth <= 0)
             Kill();
     }
@@ -40,5 +43,15 @@ public class HealthBase : MonoBehaviour
     public void Kill()
     {
         OnKill.Invoke();
+    }
+
+    public float GetCurrentHealth()
+    {
+        return _currentHealth;
+    }
+
+    public float GetMaxHealth()
+    {
+        return _maxHealth;
     }
 }

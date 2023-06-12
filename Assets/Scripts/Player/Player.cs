@@ -33,7 +33,10 @@ public class Player : MonoBehaviour, IDamagable
 
         OnValidate();
 
+        UIManager.instance.UpdatePlayerHealth(0);
+
         _healthBase.OnKill += OnDeath;
+        _healthBase.OnDamage += OnDamage;
     }
 
     // Update is called once per frame
@@ -92,7 +95,15 @@ public class Player : MonoBehaviour, IDamagable
 
     public void OnDeath()
     {
-        Destroy(this.gameObject);
+        _animator.SetTrigger("Death");
+
+        Destroy(this.gameObject, 3f);
+
         Debug.Log("Player is dead.");
+    }
+
+    public void OnDamage()
+    {
+        UIManager.instance.UpdatePlayerHealth(_healthBase.GetMaxHealth(), _healthBase.GetCurrentHealth());
     }
 }
