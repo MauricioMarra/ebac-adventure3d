@@ -22,10 +22,10 @@ public class EnemyShoot : EnemyBase
 
     private void Update()
     {
-        if (!_isDead && _player != null)
+        if (!_isDead && _player != null && !_player.IsPlayerDead())
             transform.LookAt(_player.transform);
 
-        if (_isDead) _gun.StopShooting();
+        if (_isDead || _player.IsPlayerDead()) _gun.StopShooting();
     }
 
     private void ShootPlayer()

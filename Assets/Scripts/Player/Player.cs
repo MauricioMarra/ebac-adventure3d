@@ -16,6 +16,7 @@ public class Player : MonoBehaviour, IDamagable
 
     private CharacterController _characterController;
     private HealthBase _healthBase;
+    private bool _isDead = false;
 
 
     private void OnValidate()
@@ -96,6 +97,8 @@ public class Player : MonoBehaviour, IDamagable
     public void OnDeath()
     {
         _animator.SetTrigger("Death");
+        _characterController.enabled = false;
+        _isDead = true;
 
         Destroy(this.gameObject, 3f);
 
@@ -105,5 +108,10 @@ public class Player : MonoBehaviour, IDamagable
     public void OnDamage()
     {
         UIManager.instance.UpdatePlayerHealth(_healthBase.GetMaxHealth(), _healthBase.GetCurrentHealth());
+    }
+
+    public bool IsPlayerDead()
+    {
+        return _isDead;
     }
 }
