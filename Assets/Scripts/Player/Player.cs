@@ -15,6 +15,15 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
 
     private CharacterController _characterController;
+    private HealthBase _healthBase;
+    private bool _isDead = false;
+
+
+    private void OnValidate()
+    {
+        if (_healthBase == null)
+            _healthBase = GetComponent<HealthBase>();
+    }
 
     private float _runSpeed = 1f;
 
@@ -22,6 +31,13 @@ public class Player : MonoBehaviour, IDamagable
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
+
+        OnValidate();
+
+        UIManager.instance.UpdatePlayerHealth(0);
+
+        _healthBase.OnKill += OnDeath;
+        _healthBase.OnDamage += OnDamage;
     }
 
     // Update is called once per frame
@@ -70,11 +86,45 @@ public class Player : MonoBehaviour, IDamagable
 
     public void TakeDamage(float damage)
     {
-        
+        _healthBase.TakeDamage(damage);
     }
 
     public void TakeDamage(float damage, Vector3 hitDirection)
     {
         
+    }
+
+    public void OnDeath()
+    {
+        _animator.SetTrigger("Death");
+        _characterController.enabled = false;
+        _isDead = true;
+
+        Invoke(nameof(Revive), 3f);
+    }
+
+    private void Revive()
+    {
+        _animator.SetTrigger("Revive");
+        _isDead = false;
+
+        var newPosition = GameManager.instance.GetLastCheckpointPosition();
+        newPosition = new Vector3(newPosition.x - 5, newPosition.y, newPosition.z);
+        this.transform.position = newPosition;
+
+        _characterController.enabled = true;
+
+        _healthBase.Revive();
+        UIManager.instance.UpdatePlayerHealth(_healthBase.GetMaxHealth() ,_healthBase.GetCurrentHealth());
+    }
+
+    public void OnDamage()
+    {
+        UIManager.instance.UpdatePlayerHealth(_healthBase.GetMaxHealth(), _healthBase.GetCurrentHealth());
+    }
+
+    public bool IsPlayerDead()
+    {
+        return _isDead;
     }
 }

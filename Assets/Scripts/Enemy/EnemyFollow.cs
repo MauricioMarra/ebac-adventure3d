@@ -17,7 +17,7 @@ public class EnemyFollow : EnemyBase
 
     private void FollowPlayer()
     {
-        if (_isDead) return;
+        if (_isDead || _player == null) return;
 
         var distance = Vector3.Distance(_player.transform.position, this.transform.position);
 
