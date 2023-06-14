@@ -45,6 +45,11 @@ public class HealthBase : MonoBehaviour
         OnKill.Invoke();
     }
 
+    public void Revive()
+    {
+        _currentHealth = _maxHealth;
+    }
+
     public float GetCurrentHealth()
     {
         return _currentHealth;

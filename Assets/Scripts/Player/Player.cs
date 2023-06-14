@@ -101,7 +101,6 @@ public class Player : MonoBehaviour, IDamagable
         _isDead = true;
 
         Invoke(nameof(Revive), 3f);
-        //Destroy(this.gameObject, 3f);
     }
 
     private void Revive()
@@ -114,6 +113,9 @@ public class Player : MonoBehaviour, IDamagable
         this.transform.position = newPosition;
 
         _characterController.enabled = true;
+
+        _healthBase.Revive();
+        UIManager.instance.UpdatePlayerHealth(_healthBase.GetMaxHealth() ,_healthBase.GetCurrentHealth());
     }
 
     public void OnDamage()

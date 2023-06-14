@@ -8,6 +8,8 @@ public class EnemyShoot : EnemyBase
     [SerializeField] private Player _player;
     [SerializeField] private bool _startShooting;
 
+    private bool _isShooting = false;
+
     protected override void Start()
     {
         base.Start();
@@ -25,12 +27,22 @@ public class EnemyShoot : EnemyBase
         if (!_isDead && _player != null && !_player.IsPlayerDead())
             transform.LookAt(_player.transform);
 
-        if (_isDead || _player.IsPlayerDead()) _gun.StopShooting();
+        if (_isDead || _player.IsPlayerDead())
+        {
+            _gun.StopShooting();
+            _isShooting = false;
+        }
+
+        if (!_isDead && !_player.IsPlayerDead() && !_isShooting)
+        {
+            ShootPlayer();
+            _isShooting = true;
+        }
     }
 
     private void ShootPlayer()
     {
-        if (_startShooting)
-            _gun.StartShoting();
+       _gun.StartShoting();
+        _isShooting = true;
     }
 }
