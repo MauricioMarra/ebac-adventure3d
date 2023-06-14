@@ -100,9 +100,20 @@ public class Player : MonoBehaviour, IDamagable
         _characterController.enabled = false;
         _isDead = true;
 
-        Destroy(this.gameObject, 3f);
+        Invoke(nameof(Revive), 3f);
+        //Destroy(this.gameObject, 3f);
+    }
 
-        Debug.Log("Player is dead.");
+    private void Revive()
+    {
+        _animator.SetTrigger("Revive");
+        _isDead = false;
+
+        var newPosition = GameManager.instance.GetLastCheckpointPosition();
+        newPosition = new Vector3(newPosition.x - 5, newPosition.y, newPosition.z);
+        this.transform.position = newPosition;
+
+        _characterController.enabled = true;
     }
 
     public void OnDamage()
