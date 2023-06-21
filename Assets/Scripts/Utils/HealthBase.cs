@@ -34,7 +34,7 @@ public class HealthBase : MonoBehaviour
         if (_hitParticleSystem != null)
             _hitParticleSystem.Emit(30);
 
-        OnDamage.Invoke();
+        OnDamage?.Invoke();
 
         if (_currentHealth <= 0)
             Kill();

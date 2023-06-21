@@ -87,6 +87,8 @@ public class Player : MonoBehaviour, IDamagable
     public void TakeDamage(float damage)
     {
         _healthBase.TakeDamage(damage);
+        PostProcessManager.instance.FlashVignette();
+        CameraShake.instance.ShakeCamera();
     }
 
     public void TakeDamage(float damage, Vector3 hitDirection)

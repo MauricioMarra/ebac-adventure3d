@@ -7,7 +7,7 @@ public class EnemyFollow : EnemyBase
 {
     [SerializeField] private GameObject _player;
 
-    private float _minDistance = 4f;
+    private float _minDistance = 5f;
     private float _speed = .05f;
 
     private void Update()
