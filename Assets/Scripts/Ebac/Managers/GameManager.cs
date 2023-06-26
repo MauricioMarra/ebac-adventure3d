@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
         stateMachine.RegisterState(GameManagerStates.Paused, new StateBase());
 
         stateMachine.SwitchState(GameManagerStates.Intro);
+
+        ItemManager.instance.items.ForEach(x => x.scriptableObjects.Reset());
     }
 
     public void SaveCheckpoint(int key, GameObject checkpoint)

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CollectableBase : MonoBehaviour
 {
+    [SerializeField] private ItemType _itemType;
+
     [Header("Sounds")]
     public AudioSource audioSource;
 
@@ -23,6 +25,8 @@ public class CollectableBase : MonoBehaviour
 
         if (audioSource != null)
             audioSource.Play();
+
+        ItemManager.instance.AddItemByType(_itemType);
 
         Destroy(gameObject, _destroyDelay);
     }
