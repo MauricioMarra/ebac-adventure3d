@@ -67,6 +67,10 @@ public class Player : MonoBehaviour, IDamagable
         _characterController.Move(_movementVector * Time.deltaTime);
 
         _animator.SetBool("IsGrounded", _characterController.isGrounded);
+
+
+        if (Input.GetKeyDown(KeyCode.L) && !_isDead)
+            RestoreHealth();
     }
 
     private void Jump()
@@ -111,8 +115,11 @@ public class Player : MonoBehaviour, IDamagable
         _isDead = false;
 
         var newPosition = GameManager.instance.GetLastCheckpointPosition();
-        newPosition = new Vector3(newPosition.x - 5, newPosition.y, newPosition.z);
-        this.transform.position = newPosition;
+        if (newPosition != Vector3.zero)
+        {
+            newPosition = new Vector3(newPosition.x - 5, newPosition.y, newPosition.z);
+            this.transform.position = newPosition;
+        }
 
         _characterController.enabled = true;
 
@@ -128,5 +135,17 @@ public class Player : MonoBehaviour, IDamagable
     public bool IsPlayerDead()
     {
         return _isDead;
+    }
+
+    private void RestoreHealth()
+    {
+        var item = ItemManager.instance.GetItemByType(ItemType.LifePack);
+
+        if (item != null)
+        {
+            _healthBase.RestoreHealth();
+            ItemManager.instance.RemoveItemByType(ItemType.LifePack);
+            UIManager.instance.UpdatePlayerHealth(0);
+        }
     }
 }

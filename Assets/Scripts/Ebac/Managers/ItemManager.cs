@@ -28,4 +28,21 @@ public class ItemManager : Singleton<ItemManager>
         items.Find(x => x.Type == type)?.scriptableObjects?.Add();
         UIManager.instance.UpdateItems();
     }
+
+    public ItemSetup GetItemByType(ItemType type)
+    {
+        var item = items.Find(x => x.Type == type && x.scriptableObjects.value > 0);
+
+        return item;
+    }
+
+    public void RemoveItemByType(ItemType type)
+    {
+        var item = items.Find(x => x.Type == type);
+        item?.scriptableObjects?.Subtract();
+        
+        items.Remove(item);
+
+        UIManager.instance.UpdateItems();
+    }
 }

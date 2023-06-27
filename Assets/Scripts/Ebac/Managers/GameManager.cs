@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
 
     public Vector3 GetLastCheckpointPosition()
     {
-        return _lastCheckpointObject.transform.position;
+        return _lastCheckpointObject  == null ? Vector3.zero : _lastCheckpointObject.transform.position;
     }
 
     #region DEBUG
