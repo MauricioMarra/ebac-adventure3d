@@ -141,7 +141,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         var item = ItemManager.instance.GetItemByType(ItemType.LifePack);
 
-        if (item != null)
+        if (item != null && _healthBase.GetCurrentHealth() < _healthBase.GetMaxHealth())
         {
             _healthBase.RestoreHealth();
             ItemManager.instance.RemoveItemByType(ItemType.LifePack);
