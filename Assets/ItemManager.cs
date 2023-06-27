@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ItemType
 {
@@ -15,6 +16,7 @@ public class ItemSetup
 {
     public ItemType Type;
     public SOItem scriptableObjects;
+    public Sprite icon;
 }
 
 public class ItemManager : Singleton<ItemManager>
@@ -24,5 +26,6 @@ public class ItemManager : Singleton<ItemManager>
     public void AddItemByType(ItemType type)
     {
         items.Find(x => x.Type == type)?.scriptableObjects?.Add();
+        UIManager.instance.UpdateItems();
     }
 }
