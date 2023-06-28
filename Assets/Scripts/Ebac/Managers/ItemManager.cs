@@ -40,8 +40,6 @@ public class ItemManager : Singleton<ItemManager>
     {
         var item = items.Find(x => x.Type == type);
         item?.scriptableObjects?.Subtract();
-        
-        items.Remove(item);
 
         UIManager.instance.UpdateItems();
     }

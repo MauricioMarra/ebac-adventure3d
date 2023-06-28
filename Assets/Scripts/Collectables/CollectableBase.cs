@@ -36,4 +36,9 @@ public class CollectableBase : MonoBehaviour
     {
         Collect();
     }
+
+    public ItemType GetItemType()
+    {
+        return _itemType;
+    }
 }
