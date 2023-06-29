@@ -9,6 +9,7 @@ public class EnemyShoot : EnemyBase
     [SerializeField] private bool _startShooting;
 
     private bool _isShooting = false;
+    private bool _isPlayerInRange = false;
 
     protected override void Start()
     {
@@ -18,8 +19,8 @@ public class EnemyShoot : EnemyBase
 
         transform.LookAt(_player.transform);
 
-        if (_startShooting)
-            ShootPlayer();
+        //if (_startShooting)
+        //    ShootPlayer();
     }
 
     private void Update()
@@ -27,13 +28,13 @@ public class EnemyShoot : EnemyBase
         if (!_isDead && _player != null && !_player.IsPlayerDead())
             transform.LookAt(_player.transform);
 
-        if (_isDead || _player.IsPlayerDead())
+        if (_isDead || _player.IsPlayerDead() || !_isPlayerInRange)
         {
             _gun.StopShooting();
             _isShooting = false;
         }
 
-        if (!_isDead && !_player.IsPlayerDead() && !_isShooting)
+        if (!_isDead && !_player.IsPlayerDead() && !_isShooting && _isPlayerInRange)
         {
             ShootPlayer();
             _isShooting = true;
@@ -44,5 +45,17 @@ public class EnemyShoot : EnemyBase
     {
        _gun.StartShoting();
         _isShooting = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            _isPlayerInRange = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            _isPlayerInRange = false;
     }
 }

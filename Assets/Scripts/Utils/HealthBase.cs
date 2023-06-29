@@ -42,7 +42,7 @@ public class HealthBase : MonoBehaviour
 
     public void Kill()
     {
-        OnKill.Invoke();
+        OnKill?.Invoke();
     }
 
     public void Revive()

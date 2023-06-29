@@ -12,7 +12,7 @@ public class CollectableBase : MonoBehaviour
 
     [SerializeField] private float _destroyDelay = 5.0f;
 
-    private void OnTriggerEnter(Collider collision)
+    protected virtual void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag(playerTag)) OnCollect();
     }

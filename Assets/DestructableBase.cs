@@ -10,6 +10,13 @@ public class DestructableBase : MonoBehaviour, IDamagable
     [SerializeField] private float _destroyDelay;
     [SerializeField] private int _vibration;
 
+    [Space]
+    [Header("Drop Item Config")]
+    [SerializeField] GameObject _dropable;
+    [SerializeField] GameObject _dropOrigin;
+    [SerializeField] float _multiplier;
+    [SerializeField] int _quantity;
+
     private HealthBase _health;
 
     private void OnValidate()
@@ -51,6 +58,18 @@ public class DestructableBase : MonoBehaviour, IDamagable
 
     public void Kill()
     {
+        DropItem();
         Destroy(gameObject, _destroyDelay);
+    }
+
+    [NaughtyAttributes.Button]
+    private void DropItem()
+    {
+        for (int i = 1; i <= _quantity; i++)
+        {
+            var obj = Instantiate(_dropable, _dropOrigin.transform.position + Vector3.up * 5, Quaternion.identity);
+            obj.transform.Rotate(Vector3.up * 120 * i);
+            obj.GetComponent<Rigidbody>()?.AddForce(obj.transform.forward * _multiplier);
+        }
     }
 }
