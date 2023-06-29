@@ -58,6 +58,7 @@ public class DestructableBase : MonoBehaviour, IDamagable
 
     public void Kill()
     {
+        this.gameObject.GetComponent<MeshCollider>().enabled = false;
         DropItem();
         Destroy(gameObject, _destroyDelay);
     }

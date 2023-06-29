@@ -7,6 +7,7 @@ public class ChestControl : MonoBehaviour
 {
     [SerializeField] private GameObject _itemToCollect;
     [SerializeField] private KeyCode _openKey;
+    [SerializeField] private GameObject _notification;
 
     private bool _wasOpened = false;
     private bool _playerCanCollect = false;
@@ -21,12 +22,15 @@ public class ChestControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (_playerCanCollect && (_wasOpened == false) && Input.GetKeyDown(_openKey))
+            OpenChest();
     }
 
     [NaughtyAttributes.Button("Open Chest")]
     private void OpenChest()
     {
+        HideNotification();
+
         GetComponent<Animator>()?.SetTrigger("Open");
 
         _itemSpawned = Instantiate(_itemToCollect, gameObject.transform);
@@ -51,9 +55,37 @@ public class ChestControl : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (_wasOpened) return;
+        //if (_wasOpened) return;
 
-        if (other.CompareTag("Player") && Input.GetKeyDown(_openKey))
-            OpenChest();
+        //if (other.CompareTag("Player") && Input.GetKeyDown(_openKey))
+        //    OpenChest();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !_wasOpened)
+        {
+            _playerCanCollect = true;
+            ShowNotification();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _playerCanCollect = false;
+            HideNotification();
+        }
+    }
+
+    private void ShowNotification()
+    {
+        _notification.SetActive(true);
+    }
+
+    private void HideNotification()
+    {
+        _notification?.SetActive(false);
     }
 }
