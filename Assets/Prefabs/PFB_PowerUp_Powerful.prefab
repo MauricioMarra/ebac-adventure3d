@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4229673314778928748}
   - component: {fileID: 1800723101614116445}
   - component: {fileID: 7357121910882692732}
+  - component: {fileID: 1927716417}
   m_Layer: 0
   m_Name: PFB_PowerUp_Powerful
   m_TagString: Untagged
@@ -94,6 +95,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1927716417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322739941564443142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97326f3faed48ff4cb21c22a5a1b1717, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7499595747425005497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,6 +114,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4229673314778928748}
     m_Modifications:
+    - target: {fileID: 2341119941966774846, guid: 64104afe4d0906e47a7a1e406854eb82, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2564078501069032671, guid: 64104afe4d0906e47a7a1e406854eb82, type: 3}
       propertyPath: m_Name
       value: PFB_Visor_Powerful
