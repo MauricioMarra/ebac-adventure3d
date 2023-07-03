@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
@@ -17,6 +15,7 @@ public class Player : MonoBehaviour, IDamagable
     private CharacterController _characterController;
     private HealthBase _healthBase;
     private bool _isDead = false;
+    private int _damageMultiplier = 1;
 
 
     private void OnValidate()
@@ -147,5 +146,15 @@ public class Player : MonoBehaviour, IDamagable
             ItemManager.instance.RemoveItemByType(ItemType.LifePack);
             UIManager.instance.UpdatePlayerHealth(0);
         }
+    }
+
+    public void ChangeDamageMultiplier(int damage)
+    {
+        _damageMultiplier = damage;
+    }
+
+    public int GetDamageMultiplier()
+    {
+        return _damageMultiplier;
     }
 }

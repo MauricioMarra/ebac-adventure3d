@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ProjectileBase : MonoBehaviour
@@ -10,6 +8,7 @@ public class ProjectileBase : MonoBehaviour
     public float direction = 1;
 
     private float _lifetime = 2f;
+    private int _damageMultiplier = 1;
 
     [SerializeField] protected List<string> _tagsToCollide = new List<string>();
 
@@ -33,9 +32,9 @@ public class ProjectileBase : MonoBehaviour
             hitDirection.y = 0;
 
             if (collision.gameObject.tag.Equals("Boss") || collision.gameObject.tag.Equals("Player"))
-                c.TakeDamage(5);
+                c.TakeDamage(5 * _damageMultiplier);
             else
-                c.TakeDamage(5, hitDirection.normalized * -1);
+                c.TakeDamage(5 * _damageMultiplier, hitDirection.normalized * -1);
 
 
             Destroy(gameObject, 3f);
@@ -51,5 +50,10 @@ public class ProjectileBase : MonoBehaviour
     protected virtual void MoveProjectile()
     {
         this.transform.Translate(0, 0, direction * bulletSpeed * Time.deltaTime);
+    }
+
+    public void ChangeDamageMultiplier(int multiplier)
+    {
+        _damageMultiplier = multiplier;
     }
 }

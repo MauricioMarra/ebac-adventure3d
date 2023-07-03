@@ -31,6 +31,7 @@ public class GunBase : MonoBehaviour
     {
         var p = Instantiate(projectile, projectileSpawnPoint.position, transform.rotation);
         p.direction = player.transform.localScale.x;
+        p.ChangeDamageMultiplier(player.GetComponent<Player>().GetDamageMultiplier());
     }
 
     public void StartShoting()

@@ -1,14 +1,14 @@
 using Ebac.Core.Singleton;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum ItemType
 {
     Coin,
-    LifePack
+    LifePack,
+    Invencibility,
+    Powerful
 }
 
 [Serializable]

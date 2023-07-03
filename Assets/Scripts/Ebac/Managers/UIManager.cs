@@ -1,5 +1,4 @@
 using Ebac.Core.Singleton;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
