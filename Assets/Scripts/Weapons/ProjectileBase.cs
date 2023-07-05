@@ -11,6 +11,7 @@ public class ProjectileBase : MonoBehaviour
     private int _damageMultiplier = 1;
 
     [SerializeField] protected List<string> _tagsToCollide = new List<string>();
+    [SerializeField] protected GameObject _particleSystem;
 
     protected virtual void Start()
     {
@@ -55,5 +56,6 @@ public class ProjectileBase : MonoBehaviour
     public void ChangeDamageMultiplier(int multiplier)
     {
         _damageMultiplier = multiplier;
+        _particleSystem.SetActive(multiplier > 1);
     }
 }
