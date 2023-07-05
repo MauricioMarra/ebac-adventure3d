@@ -56,6 +56,7 @@ public class ProjectileBase : MonoBehaviour
     public void ChangeDamageMultiplier(int multiplier)
     {
         _damageMultiplier = multiplier;
-        _particleSystem.SetActive(multiplier > 1);
+
+        if(_particleSystem != null) _particleSystem.SetActive(multiplier > 1);
     }
 }

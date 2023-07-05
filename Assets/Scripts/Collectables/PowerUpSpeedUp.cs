@@ -16,10 +16,10 @@ public class PowerUpSpeedUp : PowerUpBase
 
         OnPickUp.Invoke();
 
-        //
+        StartCoroutine(SpeedUpCoroutine());
     }
 
-    public IEnumerator PowerfulShotCoroutine()
+    public IEnumerator SpeedUpCoroutine()
     {
         yield return new WaitForSeconds(_duration);
 

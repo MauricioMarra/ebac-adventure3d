@@ -47,10 +47,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0088a790176075646b2f96ebfaf59724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 7945935637500274174}
+  mesh: {fileID: 5531986718642838481}
   powerUpSetup:
-    type: 2
+    type: 4
     material: {fileID: 2100000, guid: 1619c34651473e6488ed0a7c3527dda2, type: 2}
+  _duration: 0
+  OnPickUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SetPlayerRunSpeedBoost
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: SetPlayerRunSpeedBoost
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: -10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &6301787092576788180
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -141,5 +172,10 @@ PrefabInstance:
 --- !u!4 &5156129202454577515 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5156129202013452133, guid: 735df5ca1e8b85a4dace5171f81bc012, type: 3}
+  m_PrefabInstance: {fileID: 643134990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5531986718642838481 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5531986718136724959, guid: 735df5ca1e8b85a4dace5171f81bc012, type: 3}
   m_PrefabInstance: {fileID: 643134990}
   m_PrefabAsset: {fileID: 0}

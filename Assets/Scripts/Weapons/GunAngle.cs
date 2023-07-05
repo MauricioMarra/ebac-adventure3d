@@ -14,6 +14,7 @@ public class GunAngle : GunLimit
         for (int i = 1;  i <= _maxBulletsPerShot; i++)
         {
             var p = Instantiate(projectile, projectileSpawnPoint.position, transform.rotation);
+            p.ChangeDamageMultiplier(player.GetComponent<Player>().GetDamageMultiplier());
 
             p.transform.rotation = Quaternion.Euler(Vector3.zero);
 

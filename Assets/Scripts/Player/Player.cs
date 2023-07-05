@@ -1,13 +1,15 @@
+using BossStates;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _speed;
     [SerializeField] private float _turnSpeed = 1f;
     [SerializeField] private float _gravity = 9.8f;
     [SerializeField] private float _jumpForce = 1f;
     [SerializeField] private float _vSpeed = 0f;
     [SerializeField] private float _runSpeedFactor = 1f;
+    [SerializeField] private GameObject _trail;
 
     [SerializeField] private Animator _animator;
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
@@ -156,5 +158,15 @@ public class Player : MonoBehaviour, IDamagable
     public int GetDamageMultiplier()
     {
         return _damageMultiplier;
+    }
+
+    public void SetPlayerRunSpeedBoost(int speed)
+    {
+        this._speed += speed;
+    }
+
+    public void SetTrailsOn(bool trailsOn)
+    {
+        _trail.SetActive(trailsOn);
     }
 }

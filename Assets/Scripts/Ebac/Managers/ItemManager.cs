@@ -8,7 +8,8 @@ public enum ItemType
     Coin,
     LifePack,
     Invencibility,
-    Powerful
+    Powerful,
+    SpeedUp
 }
 
 [Serializable]
