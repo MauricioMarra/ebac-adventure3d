@@ -10,13 +10,19 @@ public class PowerUpSpeedUp : PowerUpBase
     [SerializeField] UnityEvent OnPickUp;
     [SerializeField] UnityEvent OnComplete;
 
+    private string _playerTag = "Player";
+
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
 
-        OnPickUp.Invoke();
+        if (other.CompareTag(_playerTag))
+        {
+            OnPickUp.Invoke();
 
-        StartCoroutine(SpeedUpCoroutine());
+            StartCoroutine(SpeedUpCoroutine());
+        }
+
     }
 
     public IEnumerator SpeedUpCoroutine()
