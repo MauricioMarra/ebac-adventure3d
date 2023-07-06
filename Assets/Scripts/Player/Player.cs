@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private float _vSpeed = 0f;
     [SerializeField] private float _runSpeedFactor = 1f;
     [SerializeField] private GameObject _trail;
+    [SerializeField] private ParticleSystem _dustPs;
 
     [SerializeField] private Animator _animator;
     [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
@@ -44,6 +45,12 @@ public class Player : MonoBehaviour, IDamagable
     // Update is called once per frame
     void Update()
     {
+        if (_characterController.isGrounded)
+        {
+            var p = _dustPs.main;
+            p.simulationSpeed = 1;
+        }
+
         if (Input.GetKey(_runKey))
         {
             _runSpeed = _runSpeedFactor;
@@ -80,6 +87,8 @@ public class Player : MonoBehaviour, IDamagable
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                var p = _dustPs.main;
+                p.simulationSpeed = 0;
                 _vSpeed = _jumpForce;
                 _animator.SetTrigger("Jump");
             }
