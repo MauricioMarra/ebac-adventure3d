@@ -13,6 +13,8 @@ public class CheckpointBase : MonoBehaviour
         {
             GameManager.instance.SaveCheckpoint(_key, this.gameObject);
             _particleSystem.Play();
+
+            SaveManager.instance.SaveGame();
         }
     }
 }

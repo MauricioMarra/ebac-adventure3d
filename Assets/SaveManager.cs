@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using Ebac.Core.Singleton;
 using System.IO;
-using System.Runtime.Serialization;
 using UnityEngine;
 
-public class SaveManager : GameManager
+public class SaveManager : Singleton<SaveManager>
 {
-    private SaveSetup _saveSetup;
+    [SerializeField] private SaveSetup _saveSetup;
+
+    private void Start()
+    {
+        _saveSetup = new SaveSetup();
+    }
 
     [NaughtyAttributes.Button]
     public void SaveGame()
     {
-        _saveSetup = new SaveSetup();
-
         _saveSetup.playerName = "Mauricio";
         _saveSetup.lastCheckpoint = GameManager.instance.GetLastCheckpointPosition();
 
@@ -22,8 +23,18 @@ public class SaveManager : GameManager
 
         File.WriteAllText( path, json );
     }
+
+    [NaughtyAttributes.Button]
+    public void LoadGame()
+    {
+        var file = Application.dataPath + $"/SaveGame/Save";
+        var saveFile = File.ReadAllText(file);
+
+        _saveSetup = JsonUtility.FromJson<SaveSetup>(saveFile);
+    }
 }
 
+[System.Serializable]
 public class SaveSetup
 {
     public Vector3 lastCheckpoint;
