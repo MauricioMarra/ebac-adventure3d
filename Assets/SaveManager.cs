@@ -5,6 +5,7 @@ using UnityEngine;
 public class SaveManager : Singleton<SaveManager>
 {
     [SerializeField] private SaveSetup _saveSetup;
+    [SerializeField] private Player _playerReference;
 
     private void Start()
     {
@@ -16,6 +17,9 @@ public class SaveManager : Singleton<SaveManager>
     {
         _saveSetup.playerName = "Mauricio";
         _saveSetup.lastCheckpoint = GameManager.instance.GetLastCheckpointPosition();
+        _saveSetup.coins = ItemManager.instance.GetItemByType(ItemType.Coin).scriptableObjects.value;
+        _saveSetup.lifePacks = ItemManager.instance.GetItemByType(ItemType.LifePack).scriptableObjects.value;
+        _saveSetup.health = _playerReference.GetComponent<HealthBase>().GetCurrentHealth();
 
         var json = JsonUtility.ToJson( _saveSetup );
 
@@ -31,6 +35,19 @@ public class SaveManager : Singleton<SaveManager>
         var saveFile = File.ReadAllText(file);
 
         _saveSetup = JsonUtility.FromJson<SaveSetup>(saveFile);
+
+        for(int i=0; i < _saveSetup.coins; i++)
+        {
+            ItemManager.instance.AddItemByType(ItemType.Coin);
+        }
+
+        for (int i = 0; i < _saveSetup.lifePacks; i++)
+        {
+            ItemManager.instance.AddItemByType(ItemType.LifePack);
+        }
+
+        _playerReference.GetComponent<HealthBase>().SetCurrentHealth(_saveSetup.health);
+        UIManager.instance.UpdatePlayerHealth(_playerReference.GetComponent<HealthBase>().GetMaxHealth(), _saveSetup.health);
     }
 }
 
@@ -39,4 +56,7 @@ public class SaveSetup
 {
     public Vector3 lastCheckpoint;
     public string playerName;
+    public int coins;
+    public int lifePacks;
+    public float health;
 }

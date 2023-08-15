@@ -60,6 +60,11 @@ public class HealthBase : MonoBehaviour
         return _maxHealth;
     }
 
+    public void SetCurrentHealth(float health)
+    {
+        _currentHealth = health;
+    }
+
     public void RestoreHealth()
     {
         _currentHealth = _maxHealth;
