@@ -7,6 +7,13 @@ public class SaveManager : Singleton<SaveManager>
     [SerializeField] private SaveSetup _saveSetup;
     [SerializeField] private Player _playerReference;
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private void Start()
     {
         _saveSetup = new SaveSetup();
@@ -38,16 +45,17 @@ public class SaveManager : Singleton<SaveManager>
 
         for(int i=0; i < _saveSetup.coins; i++)
         {
-            ItemManager.instance.AddItemByType(ItemType.Coin);
+            ItemManager.instance?.AddItemByType(ItemType.Coin);
         }
 
         for (int i = 0; i < _saveSetup.lifePacks; i++)
         {
-            ItemManager.instance.AddItemByType(ItemType.LifePack);
+            ItemManager.instance?.AddItemByType(ItemType.LifePack);
         }
 
-        _playerReference.GetComponent<HealthBase>().SetCurrentHealth(_saveSetup.health);
-        UIManager.instance.UpdatePlayerHealth(_playerReference.GetComponent<HealthBase>().GetMaxHealth(), _saveSetup.health);
+        _playerReference = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Player>();
+        _playerReference?.GetComponent<HealthBase>()?.SetCurrentHealth(_saveSetup.health);
+        UIManager.instance?.UpdatePlayerHealth(_playerReference.GetComponent<HealthBase>().GetMaxHealth(), _saveSetup.health);
     }
 }
 
