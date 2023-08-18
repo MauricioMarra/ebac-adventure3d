@@ -19,6 +19,14 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup = new SaveSetup();
     }
 
+    private void Update()
+    {
+        if (_playerReference == null)
+        {
+            UpdateGameInfo();
+        }
+    }
+
     [NaughtyAttributes.Button]
     public void SaveGame()
     {
@@ -43,7 +51,12 @@ public class SaveManager : Singleton<SaveManager>
 
         _saveSetup = JsonUtility.FromJson<SaveSetup>(saveFile);
 
-        for(int i=0; i < _saveSetup.coins; i++)
+        UpdateGameInfo();
+    }
+
+    private void UpdateGameInfo()
+    {
+        for (int i = 0; i < _saveSetup.coins; i++)
         {
             ItemManager.instance?.AddItemByType(ItemType.Coin);
         }

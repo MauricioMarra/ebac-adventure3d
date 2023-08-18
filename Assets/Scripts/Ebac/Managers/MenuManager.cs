@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         PauseGame(false);
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
