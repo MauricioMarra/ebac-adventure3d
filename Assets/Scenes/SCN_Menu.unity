@@ -4167,6 +4167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _saveSetup:
+    lastCheckPointID: 0
     lastCheckpoint: {x: 0, y: 0, z: 0}
     playerName: 
     coins: 0

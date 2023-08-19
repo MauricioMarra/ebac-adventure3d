@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Checkpoint")]
     [SerializeField] private int _lastCheckpoint;
-    private GameObject _lastCheckpointObject;
+    private Vector3 _lastCheckpointPosition;
 
     private void Start()
     {
@@ -31,13 +31,28 @@ public class GameManager : Singleton<GameManager>
         if (key > _lastCheckpoint)
         {
             _lastCheckpoint = key;
-            _lastCheckpointObject = checkpoint;
+            _lastCheckpointPosition = checkpoint.transform.position;
+        }
+    }
+
+    public void SaveCheckpoint(int key, Vector3 checkpoint)
+    {
+        if (key > _lastCheckpoint)
+        {
+            _lastCheckpoint = key;
+            _lastCheckpointPosition = checkpoint;
+
         }
     }
 
     public Vector3 GetLastCheckpointPosition()
     {
-        return _lastCheckpointObject  == null ? Vector3.zero : _lastCheckpointObject.transform.position;
+        return _lastCheckpointPosition  == null ? Vector3.zero : _lastCheckpointPosition;
+    }
+
+    public int GetLastCheckPointID()
+    {
+        return _lastCheckpoint;
     }
 
     #region DEBUG

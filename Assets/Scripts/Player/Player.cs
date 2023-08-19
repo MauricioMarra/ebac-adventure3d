@@ -40,6 +40,18 @@ public class Player : MonoBehaviour, IDamagable
 
         _healthBase.OnKill += OnDeath;
         _healthBase.OnDamage += OnDamage;
+
+
+        if (SaveManager.instance.WasGameLoaded())
+        {
+            SaveManager.instance.UpdateGameInfo();
+
+            var lastCheckpoint = GameManager.instance.GetLastCheckpointPosition();
+            if (lastCheckpoint != Vector3.zero)
+            {
+                this.transform.position = lastCheckpoint - new Vector3(-5,0,0);
+            }
+        }
     }
 
     // Update is called once per frame
