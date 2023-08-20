@@ -76,12 +76,11 @@ public class GameManager : Singleton<GameManager>
         _checkpointList.Add(checkpoint);
     }
 
-    public void FindCheckpointById(int id)
+    public CheckpointBase FindCheckpointById(int id)
     {
         var checkpoint = _checkpointList.Find(x => x.GetKey() == id);
 
-        if (checkpoint != null)
-            checkpoint.ActivateCheckpoint();
+        return checkpoint;
     }
 }
 

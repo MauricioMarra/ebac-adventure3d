@@ -7,11 +7,15 @@ public class SaveManager : Singleton<SaveManager>
     [SerializeField] private SaveSetup _saveSetup;
     [SerializeField] private Player _playerReference;
 
+    private string _saveFilePath;
+
     private bool _wasGameLoaded = false;
 
     public override void Awake()
     {
         base.Awake();
+
+        _saveFilePath = Application.dataPath + $"/SaveGame/Save";
 
         DontDestroyOnLoad(this.gameObject);
     }
@@ -29,6 +33,11 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
+    public void CreateSaveFile()
+    {
+        if (File.Exists(_saveFilePath)) return;
+    }
+
     [NaughtyAttributes.Button]
     public void SaveGame()
     {
@@ -41,16 +50,13 @@ public class SaveManager : Singleton<SaveManager>
 
         var json = JsonUtility.ToJson( _saveSetup );
 
-        var path = Application.dataPath + $"/SaveGame/Save";
-
-        File.WriteAllText( path, json );
+        File.WriteAllText( _saveFilePath, json );
     }
 
     [NaughtyAttributes.Button]
     public void LoadGame()
     {
-        var file = Application.dataPath + $"/SaveGame/Save";
-        var saveFile = File.ReadAllText(file);
+        var saveFile = File.ReadAllText(_saveFilePath);
 
         _saveSetup = JsonUtility.FromJson<SaveSetup>(saveFile);
 
@@ -70,6 +76,7 @@ public class SaveManager : Singleton<SaveManager>
         }
 
         GameManager.instance.SaveCheckpoint(_saveSetup.lastCheckPointID, _saveSetup.lastCheckpoint);
+        ActivateVisitedCheckpoints();
 
         if (_playerReference == null)
             _playerReference = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Player>();
@@ -83,6 +90,18 @@ public class SaveManager : Singleton<SaveManager>
     public bool WasGameLoaded()
     {
         return _wasGameLoaded;
+    }
+
+    private void ActivateVisitedCheckpoints()
+    {
+        var lastCheckpointID = _saveSetup.lastCheckPointID;
+
+        for (int i = 1; i <= lastCheckpointID; i++)
+        {
+            var checkPoint = GameManager.instance.FindCheckpointById(i);
+
+            checkPoint?.ActivateCheckpoint();
+        }
     }
 }
 
