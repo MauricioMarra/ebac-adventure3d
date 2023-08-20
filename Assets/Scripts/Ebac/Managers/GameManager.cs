@@ -1,5 +1,6 @@
 using Ebac.Core.Singleton;
 using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -9,6 +10,9 @@ public class GameManager : Singleton<GameManager>
     [Header("Checkpoint")]
     [SerializeField] private int _lastCheckpoint;
     private Vector3 _lastCheckpointPosition;
+
+    [Header("Available Chekpoints")]
+    [SerializeField] private List<CheckpointBase> _checkpointList;
 
     private void Start()
     {
@@ -66,6 +70,19 @@ public class GameManager : Singleton<GameManager>
     #endif
 
     #endregion
+
+    public void RegisterCheckpoint(CheckpointBase checkpoint)
+    {
+        _checkpointList.Add(checkpoint);
+    }
+
+    public void FindCheckpointById(int id)
+    {
+        var checkpoint = _checkpointList.Find(x => x.GetKey() == id);
+
+        if (checkpoint != null)
+            checkpoint.ActivateCheckpoint();
+    }
 }
 
 public enum GameManagerStates
