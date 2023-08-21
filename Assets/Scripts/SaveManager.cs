@@ -31,6 +31,8 @@ public class SaveManager : Singleton<SaveManager>
         {
             _playerReference = GameObject.FindGameObjectWithTag("Player")?.GetComponent<Player>();
         }
+
+
     }
 
     public void CreateSaveFile()
@@ -44,8 +46,8 @@ public class SaveManager : Singleton<SaveManager>
         _saveSetup.playerName = "Mauricio";
         _saveSetup.lastCheckPointID = GameManager.instance.GetLastCheckPointID();
         _saveSetup.lastCheckpoint = GameManager.instance.GetLastCheckpointPosition();
-        _saveSetup.coins = ItemManager.instance.GetItemByType(ItemType.Coin).scriptableObjects.value;
-        _saveSetup.lifePacks = ItemManager.instance.GetItemByType(ItemType.LifePack).scriptableObjects.value;
+        _saveSetup.coins = ItemManager.instance.GetItemByType(ItemType.Coin)?.scriptableObjects?.value ?? 0;
+        _saveSetup.lifePacks = ItemManager.instance.GetItemByType(ItemType.LifePack)?.scriptableObjects?.value ?? 0;
         _saveSetup.health = _playerReference.GetComponent<HealthBase>().GetCurrentHealth();
 
         var json = JsonUtility.ToJson( _saveSetup );

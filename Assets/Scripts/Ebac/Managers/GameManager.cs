@@ -2,6 +2,7 @@ using Ebac.Core.Singleton;
 using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -9,10 +10,15 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Checkpoint")]
     [SerializeField] private int _lastCheckpoint;
-    private Vector3 _lastCheckpointPosition;
+    [SerializeField] private Vector3 _lastCheckpointPosition;
 
     [Header("Available Chekpoints")]
     [SerializeField] private List<CheckpointBase> _checkpointList;
+
+    [SerializeField] private GameObject _pauseMenu;
+    private bool _isPauseMenuActive = false;
+
+    protected Inputs _inputActions;
 
     private void Start()
     {
@@ -22,12 +28,20 @@ public class GameManager : Singleton<GameManager>
         stateMachine.RegisterState(GameManagerStates.Intro, new GameManagerIntroState());
         stateMachine.RegisterState(GameManagerStates.Win, new StateBase());
         stateMachine.RegisterState(GameManagerStates.Lose, new StateBase());
-        stateMachine.RegisterState(GameManagerStates.Gameplay, new StateBase());
-        stateMachine.RegisterState(GameManagerStates.Paused, new StateBase());
+        stateMachine.RegisterState(GameManagerStates.Gameplay, new GameManagerRunningState());
+        stateMachine.RegisterState(GameManagerStates.Paused, new GameManagerPauseState());
 
         stateMachine.SwitchState(GameManagerStates.Intro);
 
         ItemManager.instance.items.ForEach(x => x.scriptableObjects.Reset());
+
+        _inputActions = new Inputs();
+        _inputActions.Enable();
+    }
+
+    private void Update()
+    {
+        _inputActions.Gameplay.PauseGame.performed += x => PauseGame();
     }
 
     public void SaveCheckpoint(int key, GameObject checkpoint)
@@ -81,6 +95,49 @@ public class GameManager : Singleton<GameManager>
         var checkpoint = _checkpointList.Find(x => x.GetKey() == id);
 
         return checkpoint;
+    }
+
+    public void PauseGame()
+    {
+        var current = stateMachine.GetCurrentState();
+
+        if (current.GetType() == typeof(GameManagerPauseState)) return;
+
+        stateMachine.SwitchState(GameManagerStates.Paused);
+        TogglePauseMenu();
+    }
+
+    public void ResumeGame()
+    {
+        stateMachine.SwitchState(GameManagerStates.Gameplay);
+        TogglePauseMenu();
+    }
+
+    public void QuitGame()
+    {
+        TogglePauseMenu(false);
+
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
+    public void TogglePauseMenu()
+    {
+        _isPauseMenuActive = !_isPauseMenuActive;
+        _pauseMenu.SetActive(_isPauseMenuActive);
+    }
+
+    public void TogglePauseMenu(bool active)
+    {
+        _pauseMenu.SetActive(active);
+    }
+
+    public void SaveGame()
+    {
+        SaveManager.instance.SaveGame();
     }
 }
 

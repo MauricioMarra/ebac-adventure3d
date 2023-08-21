@@ -14,7 +14,7 @@ public class CheckpointBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag.Equals("Player") && !this._isActive)
         {
             GameManager.instance.SaveCheckpoint(_key, this.gameObject);
             _particleSystem.Play();

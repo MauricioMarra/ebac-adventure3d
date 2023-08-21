@@ -6,9 +6,9 @@ using UnityEngine;
 public class EnemyFollow : EnemyBase
 {
     [SerializeField] private GameObject _player;
+    [SerializeField] private float _speed = 5f;
 
     private float _minDistance = 5f;
-    private float _speed = .05f;
 
     private void Update()
     {
@@ -24,7 +24,7 @@ public class EnemyFollow : EnemyBase
         if (distance < _minDistance)
             return;
 
-        this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, _speed);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, _speed * Time.deltaTime);
         this.transform.LookAt(_player.transform);
     }
 }
