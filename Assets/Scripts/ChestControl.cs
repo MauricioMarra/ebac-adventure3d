@@ -8,6 +8,8 @@ public class ChestControl : MonoBehaviour
     [SerializeField] private GameObject _itemToCollect;
     [SerializeField] private KeyCode _openKey;
     [SerializeField] private GameObject _notification;
+    [SerializeField] private GameObject _notificationAnchor;
+    [SerializeField] private Canvas _notificationCanvas;
 
     private bool _wasOpened = false;
     private bool _playerCanCollect = false;
@@ -81,6 +83,7 @@ public class ChestControl : MonoBehaviour
 
     private void ShowNotification()
     {
+        _notificationCanvas.transform.position = _notificationAnchor.transform.position;
         _notification.SetActive(true);
     }
 

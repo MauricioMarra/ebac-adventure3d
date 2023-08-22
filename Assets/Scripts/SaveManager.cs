@@ -53,6 +53,8 @@ public class SaveManager : Singleton<SaveManager>
         var json = JsonUtility.ToJson( _saveSetup );
 
         File.WriteAllText( _saveFilePath, json );
+
+        GameManager.instance.ShowNotification("Game saved!");
     }
 
     [NaughtyAttributes.Button]

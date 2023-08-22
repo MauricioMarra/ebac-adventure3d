@@ -1,8 +1,8 @@
 using Ebac.Core.Singleton;
 using NaughtyAttributes;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,12 +11,18 @@ public class GameManager : Singleton<GameManager>
     [Header("Checkpoint")]
     [SerializeField] private int _lastCheckpoint;
     [SerializeField] private Vector3 _lastCheckpointPosition;
+    [SerializeField] private GameObject _gameNotification;
+    [SerializeField] private TextMeshProUGUI _textNotification;
 
     [Header("Available Chekpoints")]
     [SerializeField] private List<CheckpointBase> _checkpointList;
 
     [SerializeField] private GameObject _pauseMenu;
     private bool _isPauseMenuActive = false;
+
+    private float _notificationTimer = 3f;
+    private float _counter;
+    private float _startTime;
 
     protected Inputs _inputActions;
 
@@ -42,6 +48,15 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         _inputActions.Gameplay.PauseGame.performed += x => PauseGame();
+
+        if (_counter < _notificationTimer)
+        {
+            var elapsedTime = Time.realtimeSinceStartup;
+            _counter = elapsedTime - _startTime;
+
+            if (_counter > _notificationTimer)
+                _gameNotification.SetActive(false);
+        }
     }
 
     public void SaveCheckpoint(int key, GameObject checkpoint)
@@ -138,6 +153,14 @@ public class GameManager : Singleton<GameManager>
     public void SaveGame()
     {
         SaveManager.instance.SaveGame();
+    }
+
+    public void ShowNotification(string text)
+    {
+        _counter = 0f;
+        _startTime = Time.realtimeSinceStartup;
+        _gameNotification.SetActive(true);
+        _textNotification.text = text;
     }
 }
 
