@@ -43,6 +43,8 @@ public class GameManager : Singleton<GameManager>
 
         _inputActions = new Inputs();
         _inputActions.Enable();
+
+        SoundManager.instance.PlayMusicByType(SoundManager.SoundType.Type01);
     }
 
     private void Update()
