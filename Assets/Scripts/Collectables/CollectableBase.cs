@@ -3,6 +3,7 @@ using UnityEngine;
 public class CollectableBase : MonoBehaviour
 {
     [SerializeField] private ItemType _itemType;
+    [SerializeField] private SoundManager.SoundType _sfxType;
 
     [Header("Sounds")]
     public AudioSource audioSource;
@@ -27,6 +28,8 @@ public class CollectableBase : MonoBehaviour
             audioSource.Play();
 
         ItemManager.instance.AddItemByType(_itemType);
+
+        SfxPool.instance.Play(_sfxType);
 
         Destroy(gameObject, _destroyDelay);
     }

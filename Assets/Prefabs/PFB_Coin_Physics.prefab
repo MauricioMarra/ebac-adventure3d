@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemType: 0
+  _sfxType: 5
   audioSource: {fileID: 0}
   _destroyDelay: 0
 --- !u!135 &3319018234519710355

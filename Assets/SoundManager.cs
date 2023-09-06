@@ -36,9 +36,12 @@ public class SoundManager : Singleton<SoundManager>
     [Serializable]
     public enum SoundType
     {
+        None,
         Type01,
         Type02,
         Type03,
+        Jump,
+        ColletctCoin
     }
 
     public MusicSetup GetMusicByType(SoundType type)
@@ -51,5 +54,10 @@ public class SoundManager : Singleton<SoundManager>
         _currentMusicSetup = GetMusicByType(type);
         _audioSource.clip = _currentMusicSetup.audioClip;
         _audioSource.Play();
+    }
+
+    public SfxSetup GetSfxByType(SoundType type)
+    {
+        return sfxSetups.Where(x => x.soundType == type).FirstOrDefault();
     }
 }

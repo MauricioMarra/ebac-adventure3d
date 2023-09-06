@@ -103,6 +103,8 @@ public class Player : MonoBehaviour, IDamagable
                 p.simulationSpeed = 0;
                 _vSpeed = _jumpForce;
                 _animator.SetTrigger("Jump");
+                
+                SfxPool.instance.Play(SoundManager.SoundType.Jump);
             }
         }
 
