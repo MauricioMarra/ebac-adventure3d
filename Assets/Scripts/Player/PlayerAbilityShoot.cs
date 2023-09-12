@@ -37,6 +37,8 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     void StartShooting()
     {
         _currentGun.StartShoting();
+
+        SfxPool.instance.Play(SoundManager.SoundType.Shoot);
     }
 
     void StopShooting()

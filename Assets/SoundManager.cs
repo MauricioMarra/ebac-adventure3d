@@ -41,7 +41,8 @@ public class SoundManager : Singleton<SoundManager>
         Type02,
         Type03,
         Jump,
-        ColletctCoin
+        ColletctCoin,
+        Shoot
     }
 
     public MusicSetup GetMusicByType(SoundType type)

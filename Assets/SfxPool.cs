@@ -2,12 +2,15 @@ using Ebac.Core.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SfxPool : Singleton<SfxPool>
 {
     private List<AudioSource> _audioSourceList = new List<AudioSource>();
 
     [SerializeField] private int _poolSize = 10;
+    [SerializeField] private AudioMixerGroup _mixer;
+
     private int _currentIndex = 0;
 
 
@@ -25,6 +28,7 @@ public class SfxPool : Singleton<SfxPool>
         var newAudioSource = new GameObject("SfxAudioSource");
         newAudioSource.transform.SetParent(transform);
         newAudioSource.AddComponent<AudioSource>();
+        newAudioSource.GetComponent<AudioSource>().outputAudioMixerGroup = _mixer;
 
         _audioSourceList.Add(newAudioSource.GetComponent<AudioSource>());
     }
